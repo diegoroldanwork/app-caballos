@@ -8,7 +8,7 @@ export function Firma() {
   return (
     <div className="firma">
       <Logo size={22} />
-      <p>La carpeta digital de cada caballo, para escuelas, haras y clubes.</p>
+      <p>La libreta digital de cada caballo, para escuelas, haras y clubes.</p>
       {CONTACTO
         ? <a href={`https://wa.me/${CONTACTO.replace(/\D/g, '')}?text=${encodeURIComponent('Hola, quiero conocer Querencia para mi escuela')}`} target="_blank" rel="noreferrer">Quiero Querencia en mi escuela →</a>
         : <Link href="/">Conocé Querencia →</Link>}

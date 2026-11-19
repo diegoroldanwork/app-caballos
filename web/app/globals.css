@@ -354,3 +354,9 @@ h1, h2, h3, .titulo, .registro-fecha b, .saldo .monto, .monto { font-variant-num
 .segmento button span { display: block; font-weight: 500; font-size: 11px; opacity: .75; margin-top: 1px; font-variant-numeric: tabular-nums; }
 
 .al-dia-boton { display: block; margin: 26px auto 0; background: none; border: 1px solid var(--borde-2); border-radius: 99px; padding: 8px 16px; font-size: 13px; color: var(--texto-2); cursor: pointer; }
+
+/* Bienvenida: texto legible sobre la foto */
+.portada-velo-fuerte { background: linear-gradient(180deg, rgba(15,11,8,.55) 0%, rgba(15,11,8,0) 24%, rgba(15,11,8,.15) 40%, rgba(15,11,8,.78) 66%, rgba(15,11,8,.96) 100%); }
+.bienvenida-titulo { font-size: 38px !important; line-height: 1.06 !important; text-shadow: 0 2px 18px rgba(0,0,0,.55); max-width: 15ch; }
+.bienvenida-titulo em { color: var(--oro); font-style: italic; }
+.bienvenida-sub { margin-top: 14px; font-size: 12px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: #F2ECE2; text-shadow: 0 1px 10px rgba(0,0,0,.6); }

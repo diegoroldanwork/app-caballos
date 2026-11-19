@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Logo } from '@/components/Logo'
 import { Foto } from '@/components/Foto'
 import { Firma } from '@/components/Firma'
+import { MARCA } from '@/lib/marca'
 
 const DEMO = [
   { n: 'Duquesa', t: 'demo-duquesa', d: 'Árabe · tordilla' },
@@ -15,20 +16,18 @@ export default function Inicio() {
     <main className="app">
       <header className="portada-caballo alta" style={{ height: '86dvh', maxHeight: 820 }}>
         <Foto nombre="portada" className="portada-foto" />
-        <div className="portada-velo" />
+        <div className="portada-velo portada-velo-fuerte" />
         <div className="portada-top"><Logo size={26} claro /></div>
         <div className="portada-texto">
-          <h1 style={{ fontSize: 50 }}>Cada caballo,<br /><em style={{ color: 'var(--oro)' }}>como en casa.</em></h1>
-          <p className="sec" style={{ fontSize: 15.5, maxWidth: '32ch', marginTop: 10 }}>
-            La carpeta digital de los caballos pensionados: sanidad, herrajes, veterinario y cuotas. La escuela la lleva al día; el dueño la sigue desde su celular.
-          </p>
+          <h1 className="bienvenida-titulo">La libreta digital de los caballos,<br /><em>el control total de las caballerizas.</em></h1>
+          <p className="bienvenida-sub">Todo en {MARCA}.</p>
           <Link href="/entrar" className="btn" style={{ marginTop: 22, background: 'var(--hueso)', color: 'var(--tinta)' }}>Ingresar como escuela</Link>
         </div>
       </header>
 
       <div className="contenido" style={{ paddingTop: 30 }}>
         <div className="eyebrow" style={{ color: 'var(--oro)' }}>Carpetas de ejemplo</div>
-        <h2 style={{ marginTop: 8 }}>Lo que recibe el dueño</h2>
+        <h2 style={{ marginTop: 8 }}>Lo que ve el dueño del caballo</h2>
         <div className="galeria">
           {DEMO.map((c) => (
             <Link key={c.t} href={`/c/${c.t}`} className="cuadro">
