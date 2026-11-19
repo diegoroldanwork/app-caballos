@@ -4,7 +4,10 @@
 -- Multi-escuela: cada fila de negocio lleva escuela_id y RLS la aísla.
 -- =====================================================================
 
-create extension if not exists pgcrypto;
+-- En Supabase pgcrypto vive en el schema "extensions"; lo referenciamos
+-- con nombre calificado para que funcione con cualquier search_path.
+create schema if not exists extensions;
+create extension if not exists pgcrypto with schema extensions;
 
 -- ---------------------------------------------------------------------
 -- Tipos
@@ -41,8 +44,9 @@ create or replace function public.nuevo_token()
 returns text
 language sql
 volatile
+set search_path = ''
 as $$
-  select translate(encode(gen_random_bytes(24), 'base64'), '+/=', '-_');
+  select translate(encode(extensions.gen_random_bytes(24), 'base64'), '+/=', '-_');
 $$;
 
 -- ---------------------------------------------------------------------
