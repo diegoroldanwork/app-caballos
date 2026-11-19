@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 import { ESTADO_LIQ, pesos, mes, fechaCorta } from '@/lib/formato'
 import { Logo } from '@/components/Logo'
@@ -25,7 +25,6 @@ const MEDIOS = [
 
 export default function LiquidacionDueno() {
   const { token } = useParams<{ token: string }>()
-  const router = useRouter()
   const [l, setL] = useState<Liq | null | undefined>(undefined)
   const [checkout, setCheckout] = useState(false)
   const [medio, setMedio] = useState('cuenta')
@@ -58,7 +57,7 @@ export default function LiquidacionDueno() {
     <main className="app">
       <header className="cuero cabecera" style={{ paddingBottom: 34 }}>
         <div className="cabecera-top">
-          <button className="volver" style={{ background: 'none', border: 0, color: 'inherit' }} onClick={() => router.back()}><Icono n="flecha" size={18} />Volver</button>
+          <span />
           <Pill tono={ESTADO_LIQ[l.estado].tono}>{ESTADO_LIQ[l.estado].texto}</Pill>
         </div>
         <div className="sec">{l.escuela.nombre}</div>

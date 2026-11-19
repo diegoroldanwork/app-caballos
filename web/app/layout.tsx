@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Cormorant_Garamond, Inter } from 'next/font/google'
 import { MARCA } from '@/lib/marca'
+import { Volver } from '@/components/Volver'
 import './globals.css'
 
 const serif = Cormorant_Garamond({ subsets: ['latin'], variable: '--ff-serif', weight: ['500', '600', '700'] })
@@ -17,7 +18,7 @@ export const viewport: Viewport = { width: 'device-width', initialScale: 1, them
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es-AR" className={`${serif.variable} ${inter.variable}`}>
-      <body>{children}</body>
+      <body><Volver />{children}</body>
     </html>
   )
 }
