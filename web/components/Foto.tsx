@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { fotoUrl } from '@/lib/supabase'
 
 const sinTilde = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
@@ -26,13 +26,19 @@ export function srcCaballo(nombre: string, foto?: string | null) {
 export function Foto({ nombre, foto, className = '', style, posicion = 'center 30%' }:
   { nombre: string; foto?: string | null; className?: string; style?: React.CSSProperties; posicion?: string }) {
   const [ok, setOk] = useState(true)
-  const [cargada, setCargada] = useState(false)
+  const ref = useRef<HTMLImageElement>(null)
+  // Si la imagen falló antes de que React se enganche, onError no se dispara: lo revisamos al montar.
+  useEffect(() => {
+    const img = ref.current
+    if (!img || !img.complete) return
+    if (img.naturalWidth === 0) setOk(false)
+  }, [])
   return (
     <span className={`foto ${className}`} style={style}>
       {ok && (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={srcCaballo(nombre, foto)} alt={nombre} style={{ objectPosition: posicion, opacity: cargada ? 1 : 0 }}
-          onLoad={() => setCargada(true)} onError={() => setOk(false)} />
+        <img ref={ref} src={srcCaballo(nombre, foto)} alt={nombre} style={{ objectPosition: posicion }}
+          onError={() => setOk(false)} />
       )}
       {!ok && <span className="foto-letra">{nombre.charAt(0)}</span>}
     </span>
