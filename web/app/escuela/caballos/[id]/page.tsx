@@ -63,7 +63,7 @@ function FichaCaballo() {
         <Foto nombre={c.nombre} foto={c.foto_path} className="portada-foto" />
         <div className="portada-velo" />
         <div className="portada-top">
-          <Link href="/escuela/caballos" className="volver"><Icono n="flecha" size={18} />Caballeriza</Link>
+          <span />
           <label className="btn-icono" title="Cambiar foto" style={{ cursor: 'pointer' }}>
             <Icono n="camara" size={16} />
             <input type="file" accept="image/*" hidden onChange={(e) => cambiarFoto(e.target.files?.[0])} />
