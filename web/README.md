@@ -31,6 +31,8 @@ Cada caballo sin foto se dibuja con su pelaje real (`components/Retrato.tsx`). L
    | `NEXT_PUBLIC_DEMO_EMAIL` | `demo@losaromos.com.ar` |
    | `NEXT_PUBLIC_DEMO_PASSWORD` | `Tropilla-demo-2026` |
 
+   Opcional: `NEXT_PUBLIC_CONTACTO_WHATSAPP` con tu número (ej. `+549...`) para el botón de contacto al pie de cada carpeta.
+
    La anon key es pública por diseño: lo que protege los datos son las reglas RLS de la base.
 6. **Deploy.** Tocá **Deploy** y esperá 1 o 2 minutos. Te da un link tipo `app-caballos.vercel.app`. Abrilo en el celular.
 
@@ -50,3 +52,7 @@ cp .env.example .env.local   # y completá la anon key y la contraseña
 npm install
 npm run dev                  # http://localhost:3000
 ```
+
+## Fotos de la demo
+
+Mientras la escuela no suba fotos, los caballos de la demo usan fotos libres de [Unsplash](https://unsplash.com/license) (Glen Carrie, Petra Marita Leifsdóttir, Helena Lopes, Luisa Peter, Michael Anfang, Mathias Reding, Raphael Wicker). Están en `components/Foto.tsx`. Para usar fotos propias, poné `duquesa.jpg`, `portada.jpg`, etc. en `public/caballos/` y sacá la línea correspondiente de esa lista, o subí la foto desde la ficha del caballo (botón de cámara).
