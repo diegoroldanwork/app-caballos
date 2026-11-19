@@ -16,6 +16,7 @@ create or replace function public.escuela_de_ruta(p_name text)
 returns uuid
 language sql
 immutable
+set search_path = ''
 as $$
   select case
     when split_part(p_name, '/', 1) ~ '^[0-9a-f-]{36}$' then split_part(p_name, '/', 1)::uuid
