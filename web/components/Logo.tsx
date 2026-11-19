@@ -1,24 +1,22 @@
 import { MARCA } from '@/lib/marca'
 
-/** Herradura de Tropilla. `tinta` = color de la herradura, `fondo` = color del sello. */
-export function Isotipo({ size = 36, fondo = 'var(--suela)', tinta = 'var(--crudo)' }: { size?: number; fondo?: string; tinta?: string }) {
+/** Sello de Querencia: una Q de trazo clásico dentro de un anillo fino, como una marca de estancia. */
+export function Isotipo({ size = 32, color = 'currentColor' }: { size?: number; color?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden>
-      <rect width="64" height="64" rx="16" fill={fondo} />
-      <path d="M20 46V28a12 12 0 0 1 24 0v18" fill="none" stroke={tinta} strokeWidth="6" strokeLinecap="round" />
-      <g fill={fondo}>
-        <circle cx="20" cy="34" r="1.8" /><circle cx="44" cy="34" r="1.8" />
-        <circle cx="20" cy="40" r="1.6" /><circle cx="44" cy="40" r="1.6" />
-      </g>
+    <svg width={size} height={size} viewBox="0 0 48 48" aria-hidden fill="none" stroke={color}>
+      <circle cx="24" cy="24" r="22.5" strokeWidth="1" />
+      <circle cx="24" cy="24" r="20" strokeWidth=".5" opacity=".6" />
+      <text x="24" y="31.5" textAnchor="middle" fill={color} stroke="none"
+        style={{ fontFamily: 'var(--f-titulo)', fontSize: 25, fontWeight: 500, fontStyle: 'italic' }}>Q</text>
     </svg>
   )
 }
 
-export function Logo({ size = 32, claro = false }: { size?: number; claro?: boolean }) {
+export function Logo({ size = 26, claro = false }: { size?: number; claro?: boolean }) {
   return (
-    <span className="logo">
-      <Isotipo size={size} fondo={claro ? 'var(--crudo)' : 'var(--suela)'} tinta={claro ? 'var(--suela)' : 'var(--crudo)'} />
-      <span className="logo-texto" style={{ fontSize: size * 0.82 }}>{MARCA}</span>
+    <span className="logo" style={{ color: claro ? 'var(--hueso)' : 'var(--tinta)' }}>
+      <Isotipo size={size} color={claro ? 'var(--oro)' : 'var(--suela)'} />
+      <span className="logo-texto" style={{ fontSize: Math.round(size * 0.58) }}>{MARCA.toUpperCase()}</span>
     </span>
   )
 }

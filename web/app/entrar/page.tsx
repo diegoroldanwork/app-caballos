@@ -26,14 +26,14 @@ export default function Entrar() {
   return (
     <main className="app">
       <div className="contenido" style={{ paddingTop: 60 }}>
-        <Logo size={40} />
-        <h1 style={{ marginTop: 28 }}>Entrá a tu escuela</h1>
+        <Logo size={30} />
+        <h1 style={{ marginTop: 34, fontSize: 40 }}>Ingresá a tu escuela</h1>
         <p className="sec" style={{ marginTop: 6 }}>Para la demo ya dejamos cargado el usuario de Los Aromos.</p>
         <form onSubmit={entrar} className="pila" style={{ marginTop: 24 }}>
           <label className="campo">Mail<input className="input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required /></label>
           <label className="campo">Contraseña<input className="input" type="password" value={pass} onChange={(e) => setPass(e.target.value)} required /></label>
           {error && <div className="alerta-banner">{error}</div>}
-          <button className="btn" disabled={cargando} style={{ marginTop: 8 }}>{cargando ? 'Entrando…' : 'Entrar'}</button>
+          <button className="btn" disabled={cargando} style={{ marginTop: 8 }}>{cargando ? 'Ingresando…' : 'Ingresar'}</button>
         </form>
       </div>
     </main>

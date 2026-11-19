@@ -33,8 +33,8 @@ export default function Alertas() {
   return (
     <>
       <header className="cuero cabecera">
-        <h1>Sanidad</h1>
-        <p className="sec" style={{ marginTop: 4 }}>AIE, vacunas, herraje y más, de toda la tropilla.</p>
+        <div className="eyebrow">Sanidad</div>
+        <h1 style={{ marginTop: 6 }}>Libreta de la caballeriza</h1>
       </header>
       <div className="contenido">
         <div className="fila" style={{ gap: 6, justifyContent: 'flex-start', flexWrap: 'wrap' }}>
@@ -51,11 +51,11 @@ export default function Alertas() {
             return (
               <div key={g.estado}>
                 <h2 className="fila">{g.titulo} <span className="sec">{items.length}</span></h2>
-                <div className="lista">
+                <div className="diario">
                   {items.map((a) => (
                     <Link key={a.caballo_id + a.tipo} href={`/escuela/nuevo?caballo=${a.caballo_id}&tipo=${a.tipo}`}>
-                      <Retrato nombre={a.caballo} pelaje={porId[a.caballo_id]?.pelaje} size={42} />
-                      <div className="grow"><div>{a.caballo} · {TIPOS[a.tipo]?.nombre}</div><div className="sec">{textoVence(a.dias_restantes, a.estado)} · tocá para registrar</div></div>
+                      <Retrato nombre={a.caballo} foto={porId[a.caballo_id]?.foto_path} size={40} />
+                      <div className="grow"><div><b className="titulo" style={{ fontSize: 18 }}>{a.caballo}</b> · {TIPOS[a.tipo]?.nombre}</div><div className="sec">{textoVence(a.dias_restantes, a.estado)}</div></div>
                       <Pill tono={importa(a) ? ESTADO_ALERTA[a.estado].tono : 'neutro'}>{ESTADO_ALERTA[a.estado].texto}</Pill>
                     </Link>
                   ))}

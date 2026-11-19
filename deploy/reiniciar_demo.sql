@@ -1,5 +1,5 @@
 -- =====================================================================
--- Tropilla · Reiniciar la demo
+-- Querencia · Reiniciar la demo
 -- Borra la escuela de demo y la vuelve a cargar de cero (con fechas de hoy),
 -- para grabar el video otra vez después de haber pagado o cargado cosas.
 -- Pegar entero en Supabase → SQL Editor → Run.

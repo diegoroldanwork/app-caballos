@@ -2,9 +2,8 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useEscuela } from '@/lib/escuela'
-import { traerCaballos, traerAlertas, importa, Caballo, Alerta } from '@/lib/datos'
-import { Retrato } from '@/components/Retrato'
-import { Pill } from '@/components/ui'
+import { traerCaballos, traerAlertas, peorPorCaballo, COLOR_ESTADO, Caballo, Alerta } from '@/lib/datos'
+import { Foto } from '@/components/Foto'
 import { Cargando } from '@/components/Cargando'
 
 export default function Caballos() {
@@ -18,32 +17,30 @@ export default function Caballos() {
   }, [escuela.id])
 
   if (!caballos) return <Cargando />
+  const peor = peorPorCaballo(alertas)
   const filtro = q.trim().toLowerCase()
   const lista = caballos.filter((c) => !filtro || `${c.nombre} ${c.duenos?.nombre} ${c.pelaje} ${c.raza}`.toLowerCase().includes(filtro))
 
   return (
     <>
       <header className="cuero cabecera">
-        <h1>Caballos</h1>
-        <p className="sec" style={{ marginTop: 4 }}>{caballos.length} en pensión</p>
+        <div className="eyebrow">Caballeriza</div>
+        <h1 style={{ marginTop: 6 }}>{caballos.length} caballos en pensión</h1>
       </header>
-      <div className="contenido entra">
+      <div className="contenido">
         <input className="input" placeholder="Buscar por caballo, dueño o pelaje" value={q} onChange={(e) => setQ(e.target.value)} />
-        <div className="lista" style={{ marginTop: 12 }}>
-          {lista.map((c) => {
-            const mal = alertas.filter((a) => a.caballo_id === c.id && importa(a) && a.estado !== 'por_vencer').length
-            const aviso = alertas.filter((a) => a.caballo_id === c.id && a.estado === 'por_vencer').length
-            return (
-              <Link key={c.id} href={`/escuela/caballos/${c.id}`}>
-                <Retrato nombre={c.nombre} pelaje={c.pelaje} foto={c.foto_path} size={52} />
-                <div className="grow">
-                  <div className="titulo" style={{ fontSize: 18 }}>{c.nombre}</div>
-                  <div className="sec">{c.raza} · {c.pelaje} · {c.duenos?.nombre}</div>
-                </div>
-                {mal ? <Pill tono="mal">{mal}</Pill> : aviso ? <Pill tono="aviso">{aviso}</Pill> : <Pill tono="ok">OK</Pill>}
-              </Link>
-            )
-          })}
+        <div className="galeria galeria-grilla entra" style={{ marginTop: 16 }}>
+          {lista.map((c) => (
+            <Link key={c.id} href={`/escuela/caballos/${c.id}`} className="cuadro">
+              <Foto nombre={c.nombre} foto={c.foto_path} />
+              <span className="cuadro-pie">
+                <span className="punto" style={{ background: COLOR_ESTADO[peor[c.id] ?? 'al_dia'] }} />
+                <b>{c.nombre}</b>
+                <small>{c.raza} · {c.pelaje}</small>
+                <small>{c.duenos?.nombre}</small>
+              </span>
+            </Link>
+          ))}
         </div>
         {!lista.length && <div className="vacio">No encontramos ningún caballo con “{q}”.</div>}
       </div>

@@ -5,7 +5,8 @@ import { supabase } from '@/lib/supabase'
 import { ESTADO_LIQ, pesos, mes, fechaCorta } from '@/lib/formato'
 import { Logo } from '@/components/Logo'
 import { Icono } from '@/components/Icono'
-import { Pill, Contador, vibrar } from '@/components/ui'
+import { Pill, vibrar } from '@/components/ui'
+import { Firma } from '@/components/Firma'
 import { Sello } from '@/components/Sello'
 import { HojaInferior } from '@/components/HojaInferior'
 import { Cargando } from '@/components/Cargando'
@@ -66,9 +67,9 @@ export default function LiquidacionDueno() {
       </header>
 
       <div className="contenido entra">
-        <div className="saldo" style={pagada ? { background: 'var(--cuero), linear-gradient(160deg,#8A4723,var(--suela))' } : undefined}>
-          <div className="sec">{pagada ? '¡Gracias! Está todo pago' : 'Saldo a pagar'}</div>
-          <div className="monto"><Contador valor={pagada ? Number(l.total) : Number(l.saldo)} formato={pesos} /></div>
+        <div className="saldo" >
+          <div className="eyebrow" style={{ color: 'var(--oro)' }}>{pagada ? 'Cuota abonada' : 'Saldo a pagar'}</div>
+          <div className="monto">{pesos(pagada ? l.total : l.saldo)}</div>
           {pagada && <span className="sello-mini">Pagado</span>}
           {pagada
             ? <div className="fila" style={{ justifyContent: 'flex-start', gap: 8, fontWeight: 600 }}><Icono n="check" />Pago acreditado</div>
@@ -76,7 +77,7 @@ export default function LiquidacionDueno() {
         </div>
 
         <h2>Detalle</h2>
-        <div className="lista">
+        <div className="diario">
           {items.map((i, k) => (
             <div key={k}><div className="grow"><div style={{ fontWeight: 500 }}>{i.concepto}</div><div className="sec">{i.tipo === 'pension' ? 'Pensión' : i.tipo === 'extra' ? 'Extra' : 'Ajuste'}</div></div><span className="num">{pesos(i.monto)}</span></div>
           ))}
@@ -84,7 +85,7 @@ export default function LiquidacionDueno() {
           {Number(l.pagado) > 0 && <div><div className="grow">Pagado</div><span className="num" style={{ color: 'var(--oliva)' }}>− {pesos(l.pagado)}</span></div>}
         </div>
 
-        <div className="pie"><span>Cobro hecho con</span><Logo size={22} /></div>
+        <Firma />
       </div>
 
       {checkout && (
@@ -116,7 +117,7 @@ export default function LiquidacionDueno() {
         </HojaInferior>
       )}
 
-      {sello && <Sello texto="Pagado" sub={`Gracias, ${l.dueno.split(' ')[0]}`} color="var(--oliva)" onFin={() => setSello(false)} ms={2000} />}
+      {sello && <Sello texto="Pago acreditado" sub={`Gracias, ${l.dueno.split(' ')[0]}`} color="var(--oliva)" onFin={() => setSello(false)} ms={2000} />}
     </main>
   )
 }

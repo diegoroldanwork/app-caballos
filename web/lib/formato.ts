@@ -24,7 +24,7 @@ export const ESTADO_LIQ: Record<string, { texto: string; tono: 'ok' | 'aviso' | 
 }
 
 const nf = new Intl.NumberFormat('es-AR', { maximumFractionDigits: 0 })
-export const pesos = (n: number | string | null | undefined) => `$ ${nf.format(Number(n ?? 0))}`
+export const pesos = (n: number | string | null | undefined) => `$\u00a0${nf.format(Number(n ?? 0))}`
 
 function aFecha(d: string) {
   // fechas 'YYYY-MM-DD' en hora local, sin corrimiento por zona horaria

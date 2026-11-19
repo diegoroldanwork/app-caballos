@@ -1,4 +1,3 @@
-import { Isotipo } from './Logo'
 export function Cargando() {
-  return <div className="cargando"><Isotipo size={44} /></div>
+  return <div className="cargando"><span className="cargando-linea" /></div>
 }

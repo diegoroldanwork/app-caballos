@@ -2,7 +2,7 @@
 
 App para escuelas de equitación y polo que pensionan caballos: registro de servicios (herrador, veterinario) con costo y foto, carpeta del caballo para el dueño por link, liquidación mensual con extras, cobro por Mercado Pago y alertas sanitarias.
 
-Este repo tiene el **modelo de datos en Supabase**, un **seed de demo** y la **web de la demo** (marca provisoria: *Tropilla*) en [`web/`](web/README.md). Ahí están los pasos para publicarla en Vercel.
+Este repo tiene el **modelo de datos en Supabase**, un **seed de demo** y la **web de la demo** (marca: *Querencia*) en [`web/`](web/README.md). Ahí están los pasos para publicarla en Vercel.
 
 ## Modelo
 

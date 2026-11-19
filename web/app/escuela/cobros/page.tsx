@@ -5,7 +5,7 @@ import { useEscuela } from '@/lib/escuela'
 import { linkWhatsApp, origen } from '@/lib/datos'
 import { ESTADO_LIQ, pesos, mes, fechaCorta } from '@/lib/formato'
 import { Icono } from '@/components/Icono'
-import { Pill, Contador, vibrar } from '@/components/ui'
+import { Pill, vibrar } from '@/components/ui'
 import { Sello } from '@/components/Sello'
 import { HojaInferior } from '@/components/HojaInferior'
 import { Cargando } from '@/components/Cargando'
@@ -55,21 +55,18 @@ export default function Cobros() {
   return (
     <>
       <header className="cuero cabecera">
-        <h1>Cobros</h1>
-        <p className="sec" style={{ marginTop: 4 }}>Pensión + extras de cada dueño, mes a mes.</p>
+        <div className="eyebrow">Cobranza</div>
+        <h1 style={{ marginTop: 6 }}>{porCobrar > 0 ? <>Faltan cobrar {pesos(porCobrar)}</> : 'Todo cobrado'}</h1>
+        <p className="sec" style={{ marginTop: 6 }}>Cobrado en total: {pesos(cobrado)}</p>
       </header>
       <div className="contenido">
-        <div className="kpis entra">
-          <div className="kpi costura"><span>Por cobrar</span><b><Contador valor={porCobrar} formato={pesos} /></b></div>
-          <div className="kpi costura"><span>Cobrado</span><b style={{ color: 'var(--oliva)' }}><Contador valor={cobrado} formato={pesos} /></b></div>
-        </div>
 
         {!hayDelMes && (
-          <div className="tarjeta costura" style={{ marginTop: 14 }}>
-            <b className="titulo" style={{ fontSize: 18 }}>Cerrar {mes(mesActual).toLowerCase()}</b>
+          <div className="tarjeta">
+            <b className="titulo" style={{ fontSize: 22 }}>Cerrar {mes(mesActual).toLowerCase()}</b>
             <p className="sec" style={{ margin: '4px 0 12px' }}>Arma la cuota de cada dueño con la pensión y todos los extras cargados en el mes.</p>
             <button className="btn btn-suela" disabled={ocupado}
-              onClick={() => correr(() => supabase.rpc('generar_liquidaciones', { p_escuela: escuela.id, p_periodo: mesActual }), { texto: 'Liquidado', sub: 'Cuotas del mes armadas' })}>
+              onClick={() => correr(() => supabase.rpc('generar_liquidaciones', { p_escuela: escuela.id, p_periodo: mesActual }), { texto: 'Liquidaciones generadas', sub: 'Cuotas del mes armadas' })}>
               {ocupado ? 'Armando…' : 'Generar liquidaciones del mes'}
             </button>
           </div>
@@ -79,18 +76,18 @@ export default function Cobros() {
         {periodos.map((p) => (
           <div key={p}>
             <h2>{mes(p)}</h2>
-            <div className="lista entra">
+            <div className="diario entra">
               {liqs.filter((l) => l.periodo === p).map((l) => {
                 const e = ESTADO_LIQ[l.estado]
                 const saldo = Number(l.total) - Number(l.pagado)
                 return (
-                  <button key={l.id} onClick={() => { setAbierta(l.id); vibrar(8) }} style={{ width: '100%', textAlign: 'left', background: 'none', border: 0, cursor: 'pointer' }}>
+                  <button key={l.id} onClick={() => { setAbierta(l.id); vibrar(8) }} style={{ width: '100%', textAlign: 'left', background: 'none', borderLeft: 0, borderRight: 0, borderTop: 0, cursor: 'pointer', alignItems: 'center' }}>
                     <div className="grow">
-                      <div>{l.duenos?.nombre}</div>
+                      <div className="titulo" style={{ fontSize: 19 }}>{l.duenos?.nombre}</div>
                       <div className="sec">{l.liquidacion_items.length} ítems{saldo > 0 && l.estado !== 'borrador' ? ` · debe ${pesos(saldo)}` : ''}</div>
                     </div>
                     <div style={{ textAlign: 'right' }}>
-                      <div className="num">{pesos(l.total)}</div>
+                      <div className="num-fino">{pesos(l.total)}</div>
                       <Pill tono={e.tono}>{e.texto}</Pill>
                     </div>
                   </button>
@@ -121,7 +118,7 @@ export default function Cobros() {
           <div className="pila" style={{ marginTop: 16 }}>
             {sel.estado === 'borrador' && (
               <button className="btn btn-suela" disabled={ocupado}
-                onClick={() => correr(() => supabase.rpc('emitir_liquidacion', { p_liquidacion: sel.id }), { texto: 'Emitida', sub: `Cuota de ${sel.duenos?.nombre}` })}>
+                onClick={() => correr(() => supabase.rpc('emitir_liquidacion', { p_liquidacion: sel.id }), { texto: 'Liquidación emitida', sub: `Cuota de ${sel.duenos?.nombre}` })}>
                 Emitir y dejar lista para cobrar
               </button>
             )}
@@ -132,7 +129,7 @@ export default function Cobros() {
                   target="_blank" rel="noreferrer"><Icono n="whatsapp" size={18} />Mandar por WhatsApp</a>
                 <button className="btn btn-sec" disabled={ocupado}
                   onClick={() => correr(() => supabase.from('pagos').insert({ escuela_id: escuela.id, liquidacion_id: sel.id, metodo: 'efectivo', estado: 'aprobado', monto: Number(sel.total) - Number(sel.pagado), pagado_el: new Date().toISOString() }),
-                    { texto: 'Pagado', sub: `${sel.duenos?.nombre} está al día` })}>
+                    { texto: 'Pago registrado', sub: `${sel.duenos?.nombre} está al día` })}>
                   Registrar pago en efectivo
                 </button>
                 <a className="btn btn-sec" href={`/l/${sel.token_publico}`} target="_blank" rel="noreferrer"><Icono n="link" size={18} />Ver lo que recibe el dueño</a>

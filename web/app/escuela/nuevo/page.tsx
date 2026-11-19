@@ -92,12 +92,13 @@ function NuevoServicio() {
   return (
     <>
       <header className="cuero cabecera">
-        <h1>Cargar servicio</h1>
-        <p className="sec" style={{ marginTop: 4 }}>Queda en la carpeta del caballo y se suma a la cuota del mes.</p>
+        <div className="eyebrow">Nuevo registro</div>
+        <h1 style={{ marginTop: 6 }}>Registrar un servicio</h1>
+        <p className="sec" style={{ marginTop: 6 }}>Queda en la carpeta del caballo y, si corresponde, en la cuota del mes.</p>
       </header>
 
       <div className="contenido" ref={pasoRef}>
-        <div className="paso"><i>1</i>¿A qué caballo?</div>
+        <div className="paso"><i>01</i>¿A qué caballo?</div>
         <div className="chips">
           {caballos.map((c) => (
             <button key={c.id} className="chip" aria-pressed={caballo === c.id} onClick={() => { setCaballo(c.id); vibrar(8) }}>
@@ -106,16 +107,16 @@ function NuevoServicio() {
           ))}
         </div>
 
-        <div className="paso"><i>2</i>¿Qué se le hizo?</div>
+        <div className="paso"><i>02</i>¿Qué se le hizo?</div>
         <div className="chips">
           {Object.entries(TIPOS).map(([k, t]) => (
             <button key={k} className="chip" aria-pressed={tipo === k} onClick={() => { setTipo(k); setCosto(String(SUGERIDO[k].costo[0])); vibrar(8) }}>
-              <Icono n={t.icono} size={26} />{t.nombre}
+              <Icono n={t.icono} size={24} />{t.nombre}
             </button>
           ))}
         </div>
 
-        <div className="paso"><i>3</i>Una foto <span className="sec" style={{ fontWeight: 400 }}>(opcional)</span></div>
+        <div className="paso"><i>03</i>Una foto <span className="sec" style={{ fontWeight: 400 }}>(opcional)</span></div>
         <label className="foto-input">
           {preview ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -126,7 +127,7 @@ function NuevoServicio() {
           <input ref={fotoRef} type="file" accept="image/*" capture="environment" hidden onChange={(e) => elegirFoto(e.target.files?.[0])} />
         </label>
 
-        <div className="paso"><i>4</i>¿Cuánto salió?</div>
+        <div className="paso"><i>04</i>¿Cuánto salió?</div>
         <div className="costo">
           <span className="titulo" style={{ fontSize: 28 }}>$</span>
           <input className="input" inputMode="numeric" value={costo ? Number(costo).toLocaleString('es-AR') : ''} placeholder="0"
@@ -153,7 +154,7 @@ function NuevoServicio() {
       </div>
 
       {hecho && (
-        <Sello texto="Cargado" sub={`${TIPOS[tipo!]?.nombre} de ${elegido?.nombre}`}
+        <Sello texto="Guardado en la carpeta" sub={`${TIPOS[tipo!]?.nombre} de ${elegido?.nombre}`}
           onFin={() => router.push(`/escuela/caballos/${caballo}?nuevo=${hecho.id}`)} />
       )}
     </>

@@ -1,1 +1,1 @@
-export const MARCA = 'Tropilla'
+export const MARCA = 'Querencia'

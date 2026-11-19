@@ -1,4 +1,4 @@
-# Tropilla · web de la demo
+# Querencia · web de la demo
 
 App web (Next.js) pensada para usar desde el celular. Lee y escribe en el proyecto de Supabase `app-caballos`.
 
@@ -6,7 +6,7 @@ App web (Next.js) pensada para usar desde el celular. Lee y escribe en el proyec
 |---|---|---|
 | Portada | `/` | cualquiera |
 | Entrar | `/entrar` | la escuela |
-| Inicio de la escuela: cobros, la tropilla, lo urgente y lo último cargado | `/escuela` | la escuela |
+| Inicio de la escuela: lo urgente del día, la caballeriza con fotos, la cobranza y lo último cargado | `/escuela` | la escuela |
 | Caballos y ficha de cada caballo (compartir carpeta por WhatsApp) | `/escuela/caballos` | la escuela |
 | Cargar servicio en 4 toques, con foto desde la cámara | `/escuela/nuevo` | la escuela |
 | Sanidad: AIE, vacunas, herraje… | `/escuela/alertas` | la escuela |

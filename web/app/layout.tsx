@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from 'next'
-import { Fraunces, Inter } from 'next/font/google'
+import { Cormorant_Garamond, Inter } from 'next/font/google'
 import { MARCA } from '@/lib/marca'
 import './globals.css'
 
-const fraunces = Fraunces({ subsets: ['latin'], variable: '--ff-fraunces', weight: ['500', '700'] })
+const serif = Cormorant_Garamond({ subsets: ['latin'], variable: '--ff-serif', weight: ['500', '600', '700'] })
 const inter = Inter({ subsets: ['latin'], variable: '--ff-inter' })
 
 export const metadata: Metadata = {
@@ -12,11 +12,11 @@ export const metadata: Metadata = {
   icons: { icon: '/icono.svg' },
 }
 
-export const viewport: Viewport = { width: 'device-width', initialScale: 1, themeColor: '#7A3E1D' }
+export const viewport: Viewport = { width: 'device-width', initialScale: 1, themeColor: '#1E1712' }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es-AR" className={`${fraunces.variable} ${inter.variable}`}>
+    <html lang="es-AR" className={`${serif.variable} ${inter.variable}`}>
       <body>{children}</body>
     </html>
   )

@@ -1,5 +1,5 @@
 -- =====================================================================
--- Tropilla · Usuario de la escuela de demo
+-- Querencia · Usuario de la escuela de demo
 -- Pegar en Supabase → SQL Editor → Run. Se puede correr más de una vez.
 -- Crea demo@losaromos.com.ar con la contraseña de abajo y lo hace admin
 -- de la Escuela Ecuestre Los Aromos.
